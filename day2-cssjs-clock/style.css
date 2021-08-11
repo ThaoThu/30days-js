@@ -1,0 +1,54 @@
+html {
+  font-size: 10px;
+  background: url('./background.jpg') bottom center;
+  background-size: cover;
+}
+
+body,html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+html {
+  background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+  background-size: cover;
+  font-family: 'helvetica neue';
+  text-align: center;
+  font-size: 10px;
+height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock{
+  width: 200px;
+  height: 200px;
+  border : 5px solid #fff;
+  border-radius: 50%;
+  position: relative;
+}
+.hand{
+  height: 6px;
+  width: 90px;
+  background-color: rgb(201, 212, 36);
+  position: absolute;
+  top:50%;
+  margin-top: -3px;
+  left: 10px;
+  
+  transform-origin: right;
+
+  
+
+
+}
+.second-hand{
+  background:rgb(13, 156, 49)
+}
+.hour-hand{
+  width: 60px;
+  left: 40px;
+  background:rgb(0, 119, 255)
+
+}

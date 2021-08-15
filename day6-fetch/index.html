@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+</body>
+<script>
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  let cities = []
+  let data = fetch(endpoint)
+  .then(res=>res.json())
+  .then(data=>{
+    cities = data
+    // console.log("🚀 ~ file: index.html ~ line 26 ~ cities", cities,data)
+  })
+// console.log('cities', cities);
+let input = document.querySelector('.search')
+let suggest = document.querySelector('.suggestions')
+
+function findMatch(word,cities){
+  
+  let regex = new RegExp(word,'gi')
+  let matchValue = cities.filter(item=>{
+    console.log(item.city, item.city.match(regex));
+ return item.city.match(regex) || item.state.match(regex)
+} )
+return matchValue
+}
+
+
+ function displayMatch(){
+   let values = findMatch(this.value,cities)
+   let regex = new RegExp(this.value,'gi')
+   console.log('regex', regex);
+   let valueHtml = values.map(item=>{
+   let newCity = item.city.replace(regex,`<span class="hl">${this.value}</span>`)
+   let newState =  item.state.replace(regex,`<span class="hl">${this.value}</span>`)
+
+     return `<li> ${newCity}, ${newState} </li>`
+   }).join('')
+   suggest.innerHTML = valueHtml
+
+}
+input.addEventListener('change',displayMatch)
+input.addEventListener('keyup',displayMatch)
+
+
+</script>
+</html>
